@@ -1,0 +1,40 @@
+td {
+    width: 75px;
+    height: 75px;
+}
+table{
+    border-collapse: collapse;
+}body {
+    background: silver;
+}
+
+td:nth-child(1){
+    background: hsl(0, 100%,0%);
+}
+td:nth-child(2){
+    background: hsl(0, 90%,10%);
+}
+td:nth-child(3){
+    background: hsl(0, 80%,20%);
+}
+td:nth-child(4){
+    background: hsl(0, 70%,30%);
+}
+td:nth-child(5){
+    background: hsl(0, 60%,40%);
+}
+td:nth-child(6){
+    background: hsl(0, 50%,50%);
+}
+td:nth-child(7){
+    background: hsl(0, 40%,60%);
+}
+td:nth-child(8){
+    background: hsl(0, 30%,70%);
+}
+td:nth-child(9){
+    background: hsl(0, 20%,80%);
+}
+td:nth-child(10){
+    background: hsl(0, 10%,90%);
+}
