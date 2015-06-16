@@ -1,0 +1,17 @@
+li a{
+    color: slateblue;
+}
+.about{
+    color: brown;
+    background-color: lightgoldenrodyellow;
+    width:500px;
+}
+.pics1{
+    float: right;
+}
+h2{
+    color: cornflowerblue;
+}
+h1{
+    color: navy;
+}

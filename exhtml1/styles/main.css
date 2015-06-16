@@ -1,0 +1,14 @@
+@import url(style1.css); /*importing just for example*/
+.images{
+    list-style-type: none;
+    display: inline-flex;
+}
+.navi li{
+    display: inline;
+    /*inline-block*/
+}
+
+.body-back{
+    background-color: aliceblue;
+}
+
