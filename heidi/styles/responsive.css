@@ -1,0 +1,141 @@
+a{
+    text-decoration: none;
+}
+.clear{
+    width: 960px;
+    margin: 0 auto;
+}
+.clear:after {
+    content: '';
+    display: block;
+    clear:both;
+}
+
+#hgroup{
+    float:left;
+    margin:0;
+}
+div#hgroup h2 {
+    font-size: 16px;
+    margin:0;
+
+}
+#hgroup h1 {
+    margin:0;
+
+}
+#header nav{
+    float:right;
+}
+#header li {
+    display: inline;
+    font-size: 1.25em;
+    margin:0 5px;
+}
+#services article{
+    width: 30%;
+    margin-right: 5%;
+    float:left;
+}
+#services article.lastbox{
+    margin:0;
+}
+#services figure{
+    margin: 0;
+}
+#services img {
+    border: 1px solid lightgrey;
+    padding: 4px;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+.one_third h2{
+    font-size: 1em;
+}
+.more{
+    float:right;
+}
+#intro figure{
+    margin:0;
+
+}
+#intro img{
+    float:right;
+
+}
+#intro figcaption{
+    width: 45%;
+}
+
+#copyright .fl_right{
+    float:right;
+}
+#copyright .fl_left{
+     float:left;
+ }
+
+@media screen and (max-width: 960px) {
+    .clear {
+        width: auto;
+        /*margin: 0 auto;*/
+    }
+
+    img {
+        max-width: 100%;
+
+    }
+
+    /*#intro figcaption{*/
+    /*clear:both;*/
+    /*}*/
+    @media screen and (max-width: 724px) {
+        #intro img {
+            float: none;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #intro figcaption {
+            width: 100%;
+        }
+
+        @media screen and (max-width: 630px) {
+            #services article {
+                width: 100%;
+                margin-right: 5%;
+                float: none;
+                clear: both;
+            }
+
+            #services img {
+                width: 90%;
+                margin: 8px auto;
+                display: block;
+            }
+
+            #hgroup {
+                margin: 0 auto;
+                /*width:100%;*/
+                float: none;
+                /*display: inline-block;*/
+                text-align: center;
+
+            }
+
+            #header ul {
+                padding: 0;
+                max-width: 290px;
+                margin: 5px auto;
+
+            }
+
+            #header nav {
+                float: none;
+                text-align: center;
+
+            }
+
+        }
+
+    }
+}
