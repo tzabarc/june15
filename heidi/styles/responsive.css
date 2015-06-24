@@ -1,5 +1,13 @@
+body{
+    margin:0;
+}
 a{
     text-decoration: none;
+    outline: none;
+    color: inherit;
+}
+a:visited{
+
 }
 .clear{
     width: 960px;
@@ -10,14 +18,24 @@ a{
     display: block;
     clear:both;
 }
-
+.wrapper{
+    color:  grey;
+}
+.row1{
+    color: #C0BAB6;
+    background-color: #333333;
+}
+#header{
+    padding: 30px 0;
+}
 #hgroup{
     float:left;
     margin:0;
 }
-div#hgroup h2 {
+#hgroup h2 {
     font-size: 16px;
     margin:0;
+    font-weight: normal;
 
 }
 #hgroup h1 {
@@ -31,6 +49,9 @@ div#hgroup h2 {
     display: inline;
     font-size: 1.25em;
     margin:0 5px;
+}
+#slider{
+    margin: 15px 0;
 }
 #services article{
     width: 30%;
