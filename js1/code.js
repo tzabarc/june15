@@ -1,58 +1,62 @@
-var table = document.querySelector('table');
-var fragment = document.createDocumentFragment();
+//var table = document.querySelector('table');
 var tbody = document.querySelector('tbody');
+var fragment = document.createDocumentFragment();
 
 
-var headers = table.querySelectorAll('th');
-var headersText = [];
-for(i=0; i<headers;i++){
-    headersText[i] = headers[i].dataset['field'];
-}
-
-items.forEach(function(item, index, array){
+//var headers = table.querySelectorAll('th');
+//var headersText = [];
+//for(var i=0; i<headers;i++){
+//    headersText[i] = headers[i].dataset.field;
+//}
+var maxItems=items.length;
+items.forEach(function(item, index){
     var tr = createRowFromObject(item, index);
     fragment.appendChild(tr);
 
-    if(index===19) {
-        tbody.appendChild(fragment);
-    }
 });
+tbody.appendChild(fragment);
 
 function createRowFromObject(obj, index){
-    var tr = document.createElement('tr');
-    var
+    var tr   = document.createElement('tr'),
         tdId = document.createElement('td'),
         tdFn = document.createElement('td'),
-        tdLn= document.createElement('td');
-
-    tr.appendChild(createSelect(index));
-    tr.appendChild(tdId);
-    tr.appendChild(tdFn);
-    tr.appendChild(tdLn);
+        tdLn = document.createElement('td');
 
     tdId.innerHTML = obj.id;
     tdFn.innerHTML = obj.firstName;
     tdLn.innerHTML = obj.lastName;
+
+    tr.appendChild(createTdSelect(index));
+    tr.appendChild(tdId);
+    tr.appendChild(tdFn);
+    tr.appendChild(tdLn);
     return tr;
 }
 
 
-function createSelect(index){
+function createTdSelect(index){
     var td = document.createElement('td');
     var select = document.createElement('select');
     td.appendChild(select);
     var option;
-    for(var i = 0; i<20; i++){
+    for(var i = 0; i<maxItems; i++){
         option = document.createElement('option');
-        option.innerHTML = i.toString();
-        option.value = i;
+        option.innerHTML = option.value = i;
         select.appendChild(option);
     }
     select.value = index;
     select.onchange = selectionChanged;
-    return select;
+    select.onfocus = keepOldVal;
+    return td;
 }
 
 function selectionChanged(){
-    console.log(arguments);
+    var toIndex = this.selectedIndex;//value
+    var trToMove=this.parentElement.parentElement;
+    var fromIndex = this.oldvalue;
+
+    console.log(fromIndex);
+}
+function keepOldVal(){
+    this.oldvalue = this.value;
 }
