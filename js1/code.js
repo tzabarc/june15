@@ -33,7 +33,6 @@ function createRowFromObject(obj, index){
     return tr;
 }
 
-
 function createTdSelect(index){
     var td = document.createElement('td');
     var select = document.createElement('select');
@@ -51,12 +50,33 @@ function createTdSelect(index){
 }
 
 function selectionChanged(){
+    var fromIndex = this.oldvalue;
     var toIndex = this.selectedIndex;//value
     var trToMove=this.parentElement.parentElement;
-    var fromIndex = this.oldvalue;
-
-    console.log(fromIndex);
+    var trNodeLoose= trToMove.parentElement.removeChild(trToMove);
+    var c = document.querySelectorAll('tbody tr');
+    if (fromIndex < toIndex){
+        for(var i=fromIndex;i<toIndex;i++){
+           decTr(c[i]);
+        }
+        tbody.insertBefore(trNodeLoose,c[i]);
+    }else{
+        for( i=toIndex ;i<fromIndex;i++){
+            incTr(c[i]);
+        }
+        tbody.insertBefore(trNodeLoose,c[toIndex]);
+    }
 }
 function keepOldVal(){
     this.oldvalue = this.value;
 }
+function incTr(tr){
+    tr.querySelector('select').value++;
+}
+function decTr(tr){
+    tr.querySelector('select').value--;
+}
+//function getTr(index){
+//    var trs = document.querySelectorAll('tbody tr');
+//    return trs[index];
+//}
