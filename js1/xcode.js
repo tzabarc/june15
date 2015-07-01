@@ -1,3 +1,6 @@
+/**
+ * Created by tzabarc on 7/1/15.
+ */
 //var table = document.querySelector('table');
 //var tbody = document.getElementById('tbody');
 var table = document.querySelector('table');
@@ -24,7 +27,11 @@ genTable();
 //console.timeEnd("how long to calculate")
 
 
-function genTable(){
+function genTable(evt){
+    if (evt && evt.detail) {
+        console.log(evt.detail.pagenum);
+    }
+    //console.log(pagenum);
     var tbody = document.querySelector('tbody');
     var newTbody = document.createElement('tbody');
     var itt = items.slice(start, end);
@@ -73,14 +80,22 @@ function createTdSelect(index){
 function rppChanged(inputObj){
     rpp = +inputObj.value;
     end = start + rpp;
-    genTable();
+    publish('onRppChanged',{detail:{pagenum: 99}});
+    //genTable();
 }
-//var onPageChange = new CustomEvent('onPageChange', { 'detail': elem.dataset.time });
+subscribe('onRppChanged',genTable);//pubsub
+//unsubscribe('onRppChanged',genTable);//pubsub//test unsub
+
+var onPageChange = new CustomEvent('onPageChange',{
+    detail:{pagenum:67}
+});
+document.addEventListener('onPageChange',genTable);
 function pageChanged(inputObj){
     currentPage = +inputObj.value;
     start = rpp * (currentPage-1);
     end = start + rpp;
-    genTable();
+    document.dispatchEvent(onPageChange);
+    //genTable();
 }
 function selectionChanged(){
     var tbody = document.querySelector('tbody');
@@ -91,7 +106,7 @@ function selectionChanged(){
     var c = document.querySelectorAll('tbody tr');
     if (fromIndex < toIndex){
         for(var i=fromIndex;i<toIndex;i++){
-           decTr(c[i]);
+            decTr(c[i]);
         }
         tbody.insertBefore(trNodeLoose,c[i]);
     }else{
