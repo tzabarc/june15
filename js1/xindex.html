@@ -6,14 +6,28 @@
         <link rel="stylesheet" type="text/css" href="xstyle.css">
     </head>
     <body>
-        <table class="table">
+        <!--<table id="items" class="table">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th data-field="indexes">i</th>-->
+                <!--<th data-field="id">ID</th>-->
+                <!--<th data-field="fn">First</th>-->
+                <!--<th data-field="ln">Last</th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody id="tbody"></tbody>-->
+        <!--</table>-->
+        <table id="xitems" class="table">
             <thead>
-                <tr>
-                    <th data-field="indexes">i</th>
-                    <th data-field="id">ID</th>
-                    <th data-field="fn">First</th>
-                    <th data-field="ln">Last</th>
-                </tr>
+            <tr>
+                <th data-field="indexes"></th>
+                <th data-field="id">ID</th>
+                <th data-field="name">Name</th>
+                <th data-field="desc">Description</th>
+                <th data-field="limit">Limit</th>
+                <th data-field="price">Price</th>
+                <th data-field="addrem">Add to cart</th>
+            </tr>
             </thead>
             <tbody id="tbody"></tbody>
         </table>
@@ -28,9 +42,15 @@
                 <!--<option value="2">page 2</option>-->
                 <!--<option value="3">page 3</option>-->
             <!--</select>-->
+            <br>
+            <br>
+            Total sum:
+            <input id="cart" type="text" name="cartos" value="0" min="0">
+
         </form>
         <script src="pubsub.js"></script>
         <script src="items.js"></script>
+        <script src="xitems.js"></script>
         <script src="xcode.js"></script>
     </body>
 </html>

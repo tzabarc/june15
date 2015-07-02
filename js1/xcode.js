@@ -3,7 +3,7 @@
  */
 //var table = document.querySelector('table');
 //var tbody = document.getElementById('tbody');
-var table = document.querySelector('table');
+var table = document.querySelector('#xitems');
 //var fragment = document.createDocumentFragment();
 
 
@@ -18,7 +18,7 @@ var rpp = +document.querySelector('#rpc').value;    //records per page
 var start= 0;
 var end=start + rpp;
 
-var maxItems=items.length;
+//var maxItems=items.length;
 genTable();
 
 //var j =10;
@@ -34,7 +34,7 @@ function genTable(evt){
     //console.log(pagenum);
     var tbody = document.querySelector('tbody');
     var newTbody = document.createElement('tbody');
-    var itt = items.slice(start, end);
+    var itt = xitems.slice(start, end);
     itt.forEach(function(item, index){
         var tr = createRowFromObject(item, index);
         newTbody.appendChild(tr);
@@ -47,17 +47,26 @@ function genTable(evt){
 function createRowFromObject(obj, index){
     var tr   = document.createElement('tr'),
         tdId = document.createElement('td'),
-        tdFn = document.createElement('td'),
-        tdLn = document.createElement('td');
+        tdName = document.createElement('td'),
+        tdDesc = document.createElement('td'),
+        tdLim = document.createElement('td'),
+        tdPrc = document.createElement('td'),
+        tdAdd = document.createElement('td');
 
     tdId.innerHTML = obj.id;
-    tdFn.innerHTML = obj.firstName;
-    tdLn.innerHTML = obj.lastName;
+    tdName.innerHTML = obj.name;
+    tdDesc.innerHTML = obj.description;
+    tdLim.innerHTML = obj.limit;
+    tdPrc.innerHTML = obj.price;
+    tdAdd.innerHTML = '<button type="button" onclick="addToCart(this)">+add</button>0 <button type="button" onclick="remFromCart(this)">-rem</button>' ;
 
     tr.appendChild(createTdSelect(index));
     tr.appendChild(tdId);
-    tr.appendChild(tdFn);
-    tr.appendChild(tdLn);
+    tr.appendChild(tdName);
+    tr.appendChild(tdDesc);
+    tr.appendChild(tdLim);
+    tr.appendChild(tdPrc);
+    tr.appendChild(tdAdd);
     return tr;
 }
 
@@ -124,6 +133,17 @@ function incTr(tr){
 }
 function decTr(tr){
     tr.querySelector('select').value--;
+}
+function addToCart(btn){
+    var a= btn.nextSibling.textContent= +btn.nextSibling.textContent+1;
+
+    //var a= btn.nextSibling.textContent= ++xitems[btn.parent.parent];
+    console.log(a);
+}
+function remFromCart(btn){
+    var a= btn.previousSibling.textContent= +btn.previousSibling.textContent-1;
+    console.log(a);
+    //updateCart(diff)
 }
 //function getTr(index){
 //    var trs = document.querySelectorAll('tbody tr');

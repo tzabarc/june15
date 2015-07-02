@@ -226,4 +226,7 @@ var xitems = [
         "image": "http://placehold.it/32x32",
         "name": "do"
     }
-]
+];
+for (var key in xitems){
+    xitems[key].cnt=0;
+}
