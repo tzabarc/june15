@@ -1,9 +1,10 @@
 /**
  * Created by tzabarc on 7/1/15.
  */
-//var table = document.querySelector('table');
-//var tbody = document.getElementById('tbody');
 var table = document.querySelector('#xitems');
+var currentPage = 1;
+
+
 //var fragment = document.createDocumentFragment();
 
 
@@ -12,21 +13,22 @@ var table = document.querySelector('#xitems');
 //for(var i=0; i<headers;i++){
 //    headersText[i] = headers[i].dataset.field;
 //}
-var currentPage = 1;
-var rpp = +document.querySelector('#rpc').value;    //records per page
-//alert(rpp);
-var start= 0;
-var end=start + rpp;
-
 //var maxItems=items.length;
-genTable();
+
 
 //var j =10;
 //console.time("how long to calculate");
 //for(var i=0; i< 1000000; i++) { j += i;}
 //console.timeEnd("how long to calculate")
+//tbody.appendChild(fragment);
+//var table = document.querySelector('table');
+//var tbody = document.getElementById('tbody');
+init();
+var rpp = +document.querySelector('#rpc').value;    //records per page
+//alert(rpp);
+var start= 0;
 
-
+var end=start + rpp;
 function genTable(evt){
     if (evt && evt.detail) {
         console.log(evt.detail.pagenum);
@@ -41,10 +43,10 @@ function genTable(evt){
     });
 
     table.replaceChild(newTbody,tbody);
-    //tbody.appendChild(fragment);
 }
 
 function createRowFromObject(obj, index){
+
     var tr   = document.createElement('tr'),
         tdId = document.createElement('td'),
         tdName = document.createElement('td'),
@@ -52,14 +54,13 @@ function createRowFromObject(obj, index){
         tdLim = document.createElement('td'),
         tdPrc = document.createElement('td'),
         tdAdd = document.createElement('td');
-
     tdId.innerHTML = obj.id;
     tdName.innerHTML = obj.name;
     tdDesc.innerHTML = obj.description;
     tdLim.innerHTML = obj.limit;
     tdPrc.innerHTML = obj.price;
-    tdAdd.innerHTML = '<button type="button" onclick="addToCart(this)">+add</button>0 <button type="button" onclick="remFromCart(this)">-rem</button>' ;
 
+    tdAdd.innerHTML = '<button type="button" itemId=' + obj.id + ' onclick="addToCart(this)">+add</button>0 <button type="button" onclick="remFromCart(this)">-rem</button>' ;
     tr.appendChild(createTdSelect(index));
     tr.appendChild(tdId);
     tr.appendChild(tdName);
@@ -76,6 +77,7 @@ function createTdSelect(index){
     td.appendChild(select);
     var option;
     for(var i = start; i<end; i++){
+//genTable();
         option = document.createElement('option');
         option.innerHTML = option.value = i;
         select.appendChild(option);
@@ -90,11 +92,11 @@ function rppChanged(inputObj){
     rpp = +inputObj.value;
     end = start + rpp;
     publish('onRppChanged',{detail:{pagenum: 99}});
-    //genTable();
-}
-subscribe('onRppChanged',genTable);//pubsub
-//unsubscribe('onRppChanged',genTable);//pubsub//test unsub
 
+    subscribe('onRppChanged',genTable);//pubsub
+//unsubscribe('onRppChanged',genTable);//pubsub//test unsub
+//genTable();
+}
 var onPageChange = new CustomEvent('onPageChange',{
     detail:{pagenum:67}
 });
@@ -104,7 +106,6 @@ function pageChanged(inputObj){
     start = rpp * (currentPage-1);
     end = start + rpp;
     document.dispatchEvent(onPageChange);
-    //genTable();
 }
 function selectionChanged(){
     var tbody = document.querySelector('tbody');
@@ -114,6 +115,7 @@ function selectionChanged(){
     var trNodeLoose= trToMove.parentElement.removeChild(trToMove);
     var c = document.querySelectorAll('tbody tr');
     if (fromIndex < toIndex){
+//updateCart(diff)
         for(var i=fromIndex;i<toIndex;i++){
             decTr(c[i]);
         }
@@ -135,23 +137,26 @@ function decTr(tr){
     tr.querySelector('select').value--;
 }
 function addToCart(btn){
-    var a= btn.nextSibling.textContent= +btn.nextSibling.textContent+1;
 
+    var a= btn.nextSibling.textContent= +btn.nextSibling.textContent+1;
+    cart.addItem(btn.attributes[1].value);
     //var a= btn.nextSibling.textContent= ++xitems[btn.parent.parent];
     console.log(a);
 }
 function remFromCart(btn){
     var a= btn.previousSibling.textContent= +btn.previousSibling.textContent-1;
     console.log(a);
-    //updateCart(diff)
 }
+
 //function getTr(index){
 //    var trs = document.querySelectorAll('tbody tr');
 //    return trs[index];
 //}
-
-
-
+var cart;
+function init(){
+    cart= new Cart();
+    genTable();
+}
 
 
 
