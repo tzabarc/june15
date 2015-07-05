@@ -20,7 +20,8 @@ function unsubscribe(eType, cb ){
 }
 
 function publish(eType, data){
-    events[eType].forEach(function(cb){
-        cb(data);
+    if(events[eType])
+        events[eType].forEach(function(cb){
+             cb(data);
     })
 }
