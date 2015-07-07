@@ -4,28 +4,12 @@
 var table = document.querySelector('#xitems');
 var currentPage = 1;
 
-
-//var fragment = document.createDocumentFragment();
-
-
-//var headers = table.querySelectorAll('th');
-//var headersText = [];
-//for(var i=0; i<headers;i++){
-//    headersText[i] = headers[i].dataset.field;
-//}
-//var maxItems=items.length;
-
-
 //var j =10;
 //console.time("how long to calculate");
 //for(var i=0; i< 1000000; i++) { j += i;}
 //console.timeEnd("how long to calculate")
-//tbody.appendChild(fragment);
-//var table = document.querySelector('table');
-//var tbody = document.getElementById('tbody');
 init();
 var rpp = +document.querySelector('#rpc').value;    //records per page
-//alert(rpp);
 var start= 0;
 
 var end=start + rpp;
@@ -33,10 +17,9 @@ function genTable(evt){
     if (evt && evt.detail) {
         console.log(evt.detail.pagenum);
     }
-    //console.log(pagenum);
     var tbody = document.querySelector('tbody');
     var newTbody = document.createElement('tbody');
-    var itt = xitems.slice(start, end);
+    var itt = items.slice(start, end);
     itt.forEach(function(item, index){
         var tr = createRowFromObject(item, index);
         newTbody.appendChild(tr);
@@ -53,6 +36,8 @@ function createRowFromObject(obj, index){
         tdDesc = document.createElement('td'),
         tdLim = document.createElement('td'),
         tdPrc = document.createElement('td'),
+        buttonAdd = document.createElement('button'),
+        buttonRem = document.createElement('button'),
         tdAdd = document.createElement('td');
     tdId.innerHTML = obj.id;
     tdName.innerHTML = obj.name;
@@ -60,7 +45,27 @@ function createRowFromObject(obj, index){
     tdLim.innerHTML = obj.limit;
     tdPrc.innerHTML = obj.price;
 
-    tdAdd.innerHTML = '<button type="button" itemId=' + obj.id + ' onclick="addToCart(this)">+add</button>0 <button type="button" onclick="remFromCart(this)">-rem</button>' ;
+    //tdAdd.innerHTML = '<button type="button" itemId=' + obj.id + ' onclick="addToCart(this)">+add</button>0 <button type="button" onclick="remFromCart(this)">-rem</button>' ;
+    buttonAdd.dataset.itemId = obj.id;
+    buttonRem.dataset.itemId = obj.id;
+
+    //buttonAdd.onclick = addToCart; // (this) ?
+
+    buttonAdd.addEventListener('click', addToCart);
+    buttonRem.addEventListener('click', remFromCart);
+    buttonAdd.innerHTML = "+ Add";
+    buttonRem.innerHTML = "- Rem";
+
+
+    tdAdd.appendChild(buttonAdd);
+    tdAdd.appendChild(document.createTextNode("0"));
+    tdAdd.appendChild(buttonRem);
+
+
+    //buttonRem.onclick = remFromCart; // (this) ?
+
+
+
     tr.appendChild(createTdSelect(index));
     tr.appendChild(tdId);
     tr.appendChild(tdName);
@@ -136,16 +141,13 @@ function incTr(tr){
 function decTr(tr){
     tr.querySelector('select').value--;
 }
-function addToCart(btn){
+function addToCart(){
+    this.nextSibling.textContent = cart.addItem(this.dataset.itemId);
 
-    var a= btn.nextSibling.textContent= +btn.nextSibling.textContent+1;
-    cart.addItem(btn.attributes[1].value);
-    //var a= btn.nextSibling.textContent= ++xitems[btn.parent.parent];
-    console.log(a);
 }
-function remFromCart(btn){
-    var a= btn.previousSibling.textContent= +btn.previousSibling.textContent-1;
-    console.log(a);
+function remFromCart(){
+    this.previousSibling.textContent = cart.removeItem(this.dataset.itemId);
+
 }
 
 //function getTr(index){

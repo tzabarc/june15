@@ -1,7 +1,7 @@
 /**
  * Created by tzabarc on 7/1/15.
  */
-var xitems = [
+var items = [
     {
         "description": "Laborum veniam aliquip mollit reprehenderit ad id. Qui mollit amet voluptate consequat eiusmod consequat aliquip mollit minim fugiat nulla laborum dolor. Incididunt laborum elit laborum ad ad reprehenderit laboris consectetur dolor officia occaecat non Lorem.\r\n",
         "price": "2682$",
@@ -227,6 +227,6 @@ var xitems = [
         "name": "do"
     }
 ];
-for (var key in xitems){
-    xitems[key].cnt=0;
-}
+//for (var key in xitems){
+//    xitems[key].cnt=0;
+//}
