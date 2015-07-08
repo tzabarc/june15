@@ -2,7 +2,7 @@
  * Created by tzabarc on 7/7/15.
  */
 function Item(obj){
-    this.  =obj.  ;
+    //this.  =obj.  ;
 }
 function SaleItem(){
     Item.call(this); // call super constructor.

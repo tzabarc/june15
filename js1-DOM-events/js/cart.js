@@ -2,10 +2,10 @@
  * Created by tzabarc on 7/5/15.
  */
 
-function Cart(){
+function Cart(items){
     var db={};
 
-    totalSize=0;// no of total items
+    var totalSize=0;// no of total items
 
     //return no of instances after addition
     this.addItem= function(id){
@@ -46,29 +46,26 @@ function Cart(){
     }
 
     this.numOfItems = function(id){
-        if (id)
-            return db[id] || 0;
-        else
-            return totalSize;
+        return db[id] || 0;
     }
 
-    this.sumCost = function(id){
-        var sum=0;
+    this.sumCostById = function(id){
         if(id && !db[id]){
             return 0;
         }
 
         for(var i=0;i<items.length;i++){
-            if(id){
-                if(items[i].id == id)
-                    return this.numOfItems(id) * parseInt(items[i].price,10);
-            }
-            else{
-                sum+= this.numOfItems(id) * parseInt(items[i].price,10);// big big problem
-            }
-
+            if(items[i].id == id)
+                return this.numOfItems(id) * parseInt(items[i].price,10);
         }
+    }
 
+    this.sumCostTotal = function(){
+        var sum=0;
+
+        for(var id in db){
+            sum+= this.sumCostById(id);
+        }
         return sum;
     }
 }

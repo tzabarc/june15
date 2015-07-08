@@ -1,4 +1,4 @@
-.table{
+.productsTable{
     margin: 0 auto;
     /*font-size:2rem;*/
     float: right;
@@ -23,4 +23,21 @@ input{
 form{
  //   width: 600px;
     float: left;
+}
+.formContainer{
+
+    position:fixed;
+    bottom: 100px;
+}
+.productsTableContainer {
+
+    height: 750px;
+    overflow-y: scroll;
+ }
+.cartContainer{
+    float:right;
+    margin: 20px;
+}
+.totalCostContainer{
+    float:right;
 }

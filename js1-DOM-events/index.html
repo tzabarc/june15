@@ -17,7 +17,8 @@
             <!--</thead>-->
             <!--<tbody id="tbody"></tbody>-->
         <!--</table>-->
-        <table id="xitems" class="table">
+        <div class="productsTableContainer">
+        <table  class="productsTable">
             <thead>
             <tr>
                 <th data-field="indexes"></th>
@@ -29,28 +30,42 @@
                 <th data-field="addrem">Add to cart</th>
             </tr>
             </thead>
-            <tbody id="tbody"></tbody>
+            <tbody  id="productsTableBody"></tbody>
         </table>
-        <form>
-            Records per page :
-            <input id="rpc" type="number" name="quantity" value="5" min="1" onchange="rppChanged(this)">
-            <br>
-            Page No.
+        </div>
+        <div class="formContainer">
+            <label for="rpc">Records per page :</label>
+            <input id="rpc" type="number" name="quantity" value="5" min="1" onchange="rppChanged(this)"><br>
+            <label for="page">Page No.</label>
             <input id="page" type="number" name="www" value="1" min="1" onchange="pageChanged(this)">
-            <!--<select id="page" name="select" onChange="pageChanged(this)">-->
-                <!--<option value="1" selected>page 1</option>-->
-                <!--<option value="2">page 2</option>-->
-                <!--<option value="3">page 3</option>-->
-            <!--</select>-->
-            <br>
-            <br>
-            Total sum:
-            <input id="cart" type="text" name="cartos" value="0" min="0">
 
-        </form>
+        </div>
+        <div class="cartContainer">
+            <table  class="cartTable">
+                <thead>
+                <tr>
+                    <th data-field="id">ID</th>
+                    <th data-field="name">Name</th>
+                    <th data-field="quantity">Quantity</th>
+                    <th data-field="price">Price</th>
+                </tr>
+                </thead>
+                <tbody id="cartTableBody">
+                <tr>
+                    <td>###</td>
+                    <td>gonzo</td>
+                    <td>many</td>
+                    <td>cheap</td>
+                </tr>
+                </tbody>
+            </table>
+            <span class="totalCostContainer">Total cost : <span class="totalCostValue">0</span> $</span>
+
+        </div>
         <script src="js/pubsub.js"></script>
         <script src="js/items.js"></script>
         <script src="js/cart.js"></script>
+        <script src="js/genTables.js"></script>
         <script src="js/code.js"></script>
     </body>
 </html>
