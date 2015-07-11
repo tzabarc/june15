@@ -80,7 +80,7 @@ function createProductsRowFromObject(obj, index){
     buttonRem.innerHTML = "- Rem";
 
     tdButtonContainer.appendChild(buttonAdd);
-    tdButtonContainer.appendChild(document.createTextNode("0"));
+    tdButtonContainer.appendChild(document.createTextNode(cart.numOfItems(obj.id)));
     tdButtonContainer.appendChild(buttonRem);
 
     [createTdOrderSelect(index), tdId, tdName, tdDesc, tdLimit, tdPrice, tdButtonContainer].forEach(function (elemToAppend) {
