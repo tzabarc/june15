@@ -43,12 +43,12 @@ function pageChanged(inputObj){
     document.dispatchEvent(onPageChange);
 }
 function selectionChanged(){
-    var tbody = document.querySelector('tbody');
+    var tbody = document.querySelector('.tbody');
     var fromIndex = this.oldvalue;
     var toIndex = this.selectedIndex;//value
     var trToMove = this.parentElement.parentElement;
     var trNodeLoose= trToMove.parentElement.removeChild(trToMove);
-    var c = document.querySelectorAll('tbody tr');
+    var c = document.querySelectorAll('.tbody .Row');
     if (fromIndex < toIndex){
         for(var i=fromIndex;i<toIndex;i++){
             decTr(c[i]);

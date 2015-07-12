@@ -1,38 +1,44 @@
 /**
  * Created by tzabarc on 7/8/15.
  */
-function refreshTables(){
+function refreshTables() {
     genProductsTable();
     genCartTable();
 }
 
 /**---------------  cart table related  *****************/
 
-function genCartTable(){
-    var oldTbody = document.querySelector('.cartTable tbody');
-    var newTbody = document.createElement('tbody');
+function genCartTable() {
+    var oldTbody = document.querySelector('.cartTable .tbody');
+    var newTbody = document.createElement('div');
+    newTbody.className = "tbody";
 
-    for (var id in cart.getCart()){
+    for (var id in cart.getCart()) {
         newTbody.appendChild(createCartRowFromObject(id));
     }
 
-    document.querySelector('.cartTable').replaceChild(newTbody,oldTbody);
+    document.querySelector('.cartTable').replaceChild(newTbody, oldTbody);
 
     updateTotalCost();
 }
 
-function createCartRowFromObject(id){
-    var tr   = document.createElement('tr'),
-        tdId = document.createElement('td'),
-        tdName = document.createElement('td'),
-        tdQuantity = document.createElement('td'),
-        tdPrice = document.createElement('td');
+function createCartRowFromObject(id) {
+    var tr = document.createElement('div');
+    tr.className = "Row";
+    var tdId = document.createElement('div');
+    tdId.className = "Cell";
+    var tdName = document.createElement('div');
+    tdName.className = "Cell";
+    var tdQuantity = document.createElement('div');
+    tdQuantity.className = "Cell";
+    var tdPrice = document.createElement('div');
+    tdPrice.className = "Cell";
 
     var item = getItemById(id);
     tdId.innerHTML = id;
     tdName.innerHTML = item.name;
     tdQuantity.innerHTML = cart.numOfItems(id);
-    tdPrice.innerHTML = item.price;
+    tdPrice.innerHTML = item.getPrice();
 
     [tdId, tdName, tdQuantity, tdPrice].forEach(function (elemToAppend) {
         tr.appendChild(elemToAppend);
@@ -42,35 +48,43 @@ function createCartRowFromObject(id){
 }
 
 /**---------------  products table related  *****************/
-function genProductsTable(){
-    var tbody = document.querySelector('.productsTable tbody');
-    var newTbody = document.createElement('tbody');
+function genProductsTable() {
+    var table = document.querySelector('.productsTable');
+    var tbody = document.querySelector('.productsTable .tbody');
+    var newTbody = document.createElement('div');
+    newTbody.className = "tbody";
     var currentPageItems = itemsJson.slice(start, end);
-    currentPageItems.forEach(function(item, index){
+    currentPageItems.forEach(function (item, index) {
         newTbody.appendChild(createProductsRowFromObject(item, index));
     });
-    var table = document.querySelector('.productsTable');
 
-    table.replaceChild(newTbody,tbody);
+    table.replaceChild(newTbody, tbody);
 }
 
-function createProductsRowFromObject(obj, index){
+function createProductsRowFromObject(obj, index) {
 
-    var tr   = document.createElement('tr'),
-        tdId = document.createElement('td'),
-        tdName = document.createElement('td'),
-        tdDesc = document.createElement('td'),
-        tdLimit = document.createElement('td'),
-        tdPrice = document.createElement('td'),
-        buttonAdd = document.createElement('button'),
-        buttonRem = document.createElement('button'),
-        tdButtonContainer = document.createElement('td');
+    var tr = document.createElement('div');
+    tr.className = "Row " + obj.typeName;
+    var tdId = document.createElement('div');
+    tdId.className = "Cell";
+    var tdName = document.createElement('div');
+    tdName.className = "Cell";
+    var tdDesc = document.createElement('div');
+    tdDesc.className = "Cell";
+    var tdLimit = document.createElement('div');
+    tdLimit.className = "Cell";
+    var tdPrice = document.createElement('div');
+    tdPrice.className = "Cell";
+    var buttonAdd = document.createElement('button');
+    var buttonRem = document.createElement('button');
+    var tdButtonContainer = document.createElement('div');
+    tdButtonContainer.className = "Cell";
 
     tdId.innerHTML = obj.id;
     tdName.innerHTML = obj.name;
     tdDesc.innerHTML = obj.description;
     tdLimit.innerHTML = obj.limit;
-    tdPrice.innerHTML = obj.price;
+    tdPrice.innerHTML = obj.getPrice();
 
     buttonAdd.dataset.itemId = buttonRem.dataset.itemId = obj.id;
 
@@ -90,12 +104,14 @@ function createProductsRowFromObject(obj, index){
     return tr;
 }
 
-function createTdOrderSelect(index){
-    var td = document.createElement('td');
+function createTdOrderSelect(index) {
+    var td = document.createElement('div');
+    td.className = "Cell";
+
     var select = document.createElement('select');
     td.appendChild(select);
     var option;
-    for(var i = start; i<end; i++){
+    for (var i = start; i < end; i++) {
         option = document.createElement('option');
         option.innerHTML = option.value = i;
         select.appendChild(option);
@@ -106,6 +122,6 @@ function createTdOrderSelect(index){
     return td;
 }
 
-function keepOldVal(){
+function keepOldVal() {
     this.oldvalue = this.value;
 }

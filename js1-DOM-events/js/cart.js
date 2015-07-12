@@ -56,7 +56,7 @@ function Cart(items){
 
         for(var i=0;i<items.length;i++){
             if(items[i].id == id)
-                return this.numOfItems(id) * parseInt(items[i].price,10);
+                return this.numOfItems(id) * parseInt(items[i].getPrice(),10);
         }
     }
 

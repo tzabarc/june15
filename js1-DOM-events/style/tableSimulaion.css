@@ -1,0 +1,41 @@
+.Table
+{
+    display: table;
+}
+.Title
+{
+    display: table-caption;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+.Heading
+{
+    display: table-row;
+    font-weight: bold;
+    text-align: center;
+}
+.Row
+{
+    display: table-row;
+}
+
+.Item{
+    background-color: #d0d0ff;
+}
+.SaleItem{
+    background-color: #d0ffd0;
+}
+.Cell
+{
+    display: table-cell;
+    border: solid;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit
+}
