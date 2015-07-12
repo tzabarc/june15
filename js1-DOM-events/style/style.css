@@ -32,7 +32,7 @@ form{
 .productsTableContainer {
 
     height: 750px;
-    overflow-y: scroll;
+    overflow-y: auto;
  }
 .cartContainer{
     float:right;
