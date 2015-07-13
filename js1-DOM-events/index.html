@@ -45,12 +45,33 @@
             </div>
         </div>
     </div>
-    <span class="totalCostContainer">Total cost : <span class="totalCostValue">0</span> $</span>
+    <div class="Table couponTable">
+        <div class="Heading">
+            <div class="Cell" data-field="code">Code</div>
+            <div class="Cell" data-field="type">Type</div>
+            <div class="Cell" data-field="percent">Percent</div>
+            <div class="Cell" data-field="itemName">Item name</div>
+            <div class="Cell" data-field="refund">Refund</div>
+        </div>
+        <div class="tbody" id="couponTableBody">
+            <div class="Row">
+                <div class="Cell">#67ag</div>
+                <div class="Cell">discount</div>
+                <div class="Cell">10%</div>
+                <div class="Cell">-</div>
+                <div class="Cell">43$</div>
+            </div>
+        </div>
+    </div>
+    <div class="finalPrice">
+        <div class="CostContainer">Before Discount cost : <span class="beforeDiscountCostValue">0</span> $</div>
+        <div class="CostContainer">Discount refund : <span class="discountCostValue">0</span> $</div>
+        <div class="CostContainer">Total cost : <span class="totalCostValue">0</span> $</div>
+    </div>
 
+    
 </div>
-<script src="js/pubsub.js"></script>
-    <script src="js/objects.js"></script>
-    <script src="js/items.js"></script>
+<script src="js/pubsub.js"></script><script src="js/objects.js"></script><script src="js/items.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/GenTables.js"></script>
 <script src="js/code.js"></script>

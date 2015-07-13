@@ -10,7 +10,7 @@ function Item(obj) {
 
 Item.prototype.getPrice = function () {
     return (parseInt(this.price, 10)).toFixed(2) +'$';
-}
+};
 function SaleItem(obj, discount) {
     Item.call(this, obj); // call super constructor.
     this.discount = discount;
@@ -21,7 +21,7 @@ SaleItem.prototype = Object.create(Item.prototype);
 SaleItem.prototype.constructor = SaleItem;
 SaleItem.prototype.getPrice = function () {
     return ((parseInt(this.price) * (1 - (this.discount / 100))).toFixed(2))+'$';
-}
+};
 
 
 function Coupon(code) {
@@ -29,16 +29,17 @@ function Coupon(code) {
 
 }
 
-function DiscountCoupon() {
-    Coupon.call(this); // call super constructor.
+function DiscountCoupon(code,discountPercent) {
+    Coupon.call(this,code); // call super constructor.
+    this.discountPercent = discountPercent;
 }
 // subclass extends superclass
 DiscountCoupon.prototype = Object.create(Coupon.prototype);
 DiscountCoupon.prototype.constructor = DiscountCoupon;
 
 
-function FreeItemCoupon() {
-    Coupon.call(this); // call super constructor.
+function FreeItemCoupon(code,itemId) {
+    Coupon.call(this,code); // call super constructor.
 }
 // subclass extends superclass
 FreeItemCoupon.prototype = Object.create(Coupon.prototype);

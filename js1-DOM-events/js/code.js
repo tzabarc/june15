@@ -13,8 +13,8 @@ var end=start + rpp;
 
 init();
 
-function updateTotalCost(){
-    document.querySelector(".totalCostValue").innerHTML= cart.sumCostTotal();
+function updateTotalCost(price){
+    document.querySelector(".beforeDiscountCostValue").innerHTML= price ;
 }
 function getItemById(id) {
     for (var i=0; i < itemsJson.length; i++) {

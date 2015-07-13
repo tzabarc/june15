@@ -19,7 +19,7 @@ function genCartTable() {
 
     document.querySelector('.cartTable').replaceChild(newTbody, oldTbody);
 
-    updateTotalCost();
+    updateTotalCost(cart.sumCostTotal());
 }
 
 function createCartRowFromObject(id) {
