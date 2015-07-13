@@ -24,23 +24,3 @@ SaleItem.prototype.getPrice = function () {
 };
 
 
-function Coupon(code) {
-    this.code = code;
-
-}
-
-function DiscountCoupon(code,discountPercent) {
-    Coupon.call(this,code); // call super constructor.
-    this.discountPercent = discountPercent;
-}
-// subclass extends superclass
-DiscountCoupon.prototype = Object.create(Coupon.prototype);
-DiscountCoupon.prototype.constructor = DiscountCoupon;
-
-
-function FreeItemCoupon(code,itemId) {
-    Coupon.call(this,code); // call super constructor.
-}
-// subclass extends superclass
-FreeItemCoupon.prototype = Object.create(Coupon.prototype);
-FreeItemCoupon.prototype.constructor = FreeItemCoupon;

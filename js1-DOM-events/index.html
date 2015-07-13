@@ -19,59 +19,68 @@
             <div class="Cell" data-field="addrem">Add to cart</div>
         </div>
         <div class="tbody">
-    </div>
-</div>
-<div class="formContainer">
-    <label for="rpc">Records per page :</label>
-    <input id="rpc" type="number" name="quantity" value="5" min="1" onchange="rppChanged(this)"><br>
-    <label for="page">Page No.</label>
-    <input id="page" type="number" name="www" value="1" min="1" onchange="pageChanged(this)">
-
-</div>
-<div class="cartContainer">
-    <div class="Table cartTable">
-        <div class="Heading">
-            <div class="Cell" data-field="id">ID</div>
-            <div class="Cell" data-field="name">Name</div>
-            <div class="Cell" data-field="quantity">Quantity</div>
-            <div class="Cell" data-field="price">Price</div>
         </div>
-        <div class="tbody" id="cartTableBody">
-            <div class="Row">
-                <div class="Cell">###</div>
-                <div class="Cell">gonzo</div>
-                <div class="Cell">many</div>
-                <div class="Cell">cheap</div>
+    </div>
+    <div class="formContainer">
+        <label for="rpc">Records per page :</label>
+        <input id="rpc" type="number" name="quantity" value="5" min="1" onchange="rppChanged(this)"><br>
+        <label for="page">Page No.</label>
+        <input id="page" type="number" name="www" value="1" min="1" onchange="pageChanged(this)">
+
+    </div>
+    <div class="cartContainer">
+        <div class="Table cartTable">
+            <div class="Heading">
+                <div class="Cell" data-field="id">ID</div>
+                <div class="Cell" data-field="name">Name</div>
+                <div class="Cell" data-field="quantity">Quantity</div>
+                <div class="Cell" data-field="price">Price</div>
+            </div>
+            <div class="tbody" id="cartTableBody">
+                <div class="Row">
+                    <div class="Cell">###</div>
+                    <div class="Cell">gonzo</div>
+                    <div class="Cell">many</div>
+                    <div class="Cell">cheap</div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="Table couponTable">
-        <div class="Heading">
-            <div class="Cell" data-field="code">Code</div>
-            <div class="Cell" data-field="type">Type</div>
-            <div class="Cell" data-field="percent">Percent</div>
-            <div class="Cell" data-field="itemName">Item name</div>
-            <div class="Cell" data-field="refund">Refund</div>
-        </div>
-        <div class="tbody" id="couponTableBody">
-            <div class="Row">
-                <div class="Cell">#67ag</div>
-                <div class="Cell">discount</div>
-                <div class="Cell">10%</div>
-                <div class="Cell">-</div>
-                <div class="Cell">43$</div>
+        <div class="Table couponTable">
+            <div class="Heading">
+                <div class="Cell" data-field="code">Code</div>
+                <div class="Cell" data-field="type">Type</div>
+                <div class="Cell" data-field="percent">Percent</div>
+                <div class="Cell" data-field="itemName">Item name</div>
+                <div class="Cell" data-field="refund">Refund</div>
+            </div>
+            <div class="tbody" id="couponTableBody">
+                <div class="Row">
+                    <div class="Cell">#67ag</div>
+                    <div class="Cell">discount</div>
+                    <div class="Cell">10%</div>
+                    <div class="Cell">-</div>
+                    <div class="Cell">43$</div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="finalPrice">
-        <div class="CostContainer">Before Discount cost : <span class="beforeDiscountCostValue">0</span> $</div>
-        <div class="CostContainer">Discount refund : <span class="discountCostValue">0</span> $</div>
-        <div class="CostContainer">Total cost : <span class="totalCostValue">0</span> $</div>
-    </div>
+        <div class="couponInputContainer">
+            <label for="couponCode">Enter coupon code :</label>
+            <input id="couponCode" type="text" onchange="coupons.addCoupon(this)">
+        </div>
+        <div class="finalPrice">
+            <div class="CostContainer">Before Discount cost : <span class="beforeDiscountCostValue">0</span> $</div>
+            <div class="CostContainer">Discount refund : <span class="discountCostValue">0</span> $</div>
+            <div class="CostContainer">Total cost : <span class="totalCostValue">0</span> $</div>
+        </div>
 
-    
+    </div>
 </div>
-<script src="js/pubsub.js"></script><script src="js/objects.js"></script><script src="js/items.js"></script>
+
+
+<script src="js/pubsub.js"></script>
+<script src="js/objects.js"></script>
+<script src="js/coupons.js"></script>
+<script src="js/items.js"></script>
 <script src="js/cart.js"></script>
 <script src="js/GenTables.js"></script>
 <script src="js/code.js"></script>

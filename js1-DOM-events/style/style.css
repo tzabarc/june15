@@ -40,4 +40,15 @@ form{
 }
 .finalPrice{
     float:right;
+    margin: 10px;
+}
+.cartTable{
+    margin: 10px;
+}
+.couponTable{
+    margin: 10px;
+}
+.couponInputContainer{
+    margin: 10px;
+    /*float: left;*/
 }
