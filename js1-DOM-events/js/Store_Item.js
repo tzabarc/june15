@@ -23,4 +23,27 @@ SaleItem.prototype.getPrice = function () {
     return ((parseInt(this.price) * (1 - (this.discount / 100))).toFixed(2))+'$';
 };
 
+function Store(objArr) {
+    var itemsDB=[];
+    for(var i = 0; i<objArr.length; i++){
+        var currItem = objArr[i];
+        if(Math.random()>0.5){
+            itemsDB.push(new Item(currItem));
+        }else{
+            var discount = parseInt(Math.random()*100,10);
+            itemsDB.push(new SaleItem(currItem, discount));
+        }
+
+    }
+
+    this.getItemById = function(id) {
+        for (var i=0; i < itemsDB.length; i++) {
+            if (itemsDB[i].id === id) {
+                return itemsDB[i];
+            }
+        }
+    };
+
+}
+
 

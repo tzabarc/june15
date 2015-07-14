@@ -8,71 +8,57 @@
 //console.timeEnd("how long to calculate")
 var currentPage = 1;
 var rpp = +document.querySelector('#rpc').value;    //records per page
-var start= 0;
-var end=start + rpp;
+var start = 0;
+var end = start + rpp;
 
 init();
 
-function updateTotalCost(price){
-    document.querySelector(".beforeDiscountCostValue").innerHTML= price ;
-}
-function getItemById(id) {
-    for (var i=0; i < itemsJson.length; i++) {
-        if (itemsJson[i].id === id) {
-            return itemsJson[i];
-        }
-    }
+function updateTotalCost(price) {
+    document.querySelector(".beforeDiscountCostValue").innerText = price;
 }
 
-function rppChanged(inputObj){
+function rppChanged(inputObj) {
     rpp = +inputObj.value;
     end = start + rpp;
-    publish('onRppChanged',{detail:{pagenum: 99}});
+    publish('onRppChanged', {detail: {pagenum: 99}});
 
-    subscribe('onRppChanged',refreshTables);//pubsub
+    subscribe('onRppChanged', refreshTables);//pubsub
 }
-var onPageChange = new CustomEvent('onPageChange',{
-    detail:{pagenum:67}
+var onPageChange = new CustomEvent('onPageChange', { detail: {pagenum: 67}
 });
 
-document.addEventListener('onPageChange',refreshTables);
-function pageChanged(inputObj){
+document.addEventListener('onPageChange', refreshTables);
+function pageChanged(inputObj) {
     currentPage = +inputObj.value;
-    start = rpp * (currentPage-1);
+    start = rpp * (currentPage - 1);
     end = start + rpp;
     document.dispatchEvent(onPageChange);
 }
-function selectionChanged(){
+function selectionChanged() {
     var tbody = document.querySelector('.tbody');
     var fromIndex = this.oldvalue;
     var toIndex = this.selectedIndex;//value
     var trToMove = this.parentElement.parentElement;
-    var trNodeLoose= trToMove.parentElement.removeChild(trToMove);
-    var c = document.querySelectorAll('.tbody .Row');
-    if (fromIndex < toIndex){
-        for(var i=fromIndex;i<toIndex;i++){
-            decTr(c[i]);
+    var trNodeLoose = trToMove.parentElement.removeChild(trToMove);
+    var tbodyRow = document.querySelectorAll('.tbody .Row');
+    if (fromIndex < toIndex) {
+        for (var i = fromIndex; i < toIndex; i++) {
+            tbodyRow[i].querySelector('select').value--;
         }
-        tbody.insertBefore(trNodeLoose,c[i]);
-    }else{
-        for( i=toIndex ;i<fromIndex;i++){
-            incTr(c[i]);
+        tbody.insertBefore(trNodeLoose, tbodyRow[i]);
+    } else {
+        for (i = toIndex; i < fromIndex; i++) {
+            tbodyRow[i].querySelector('select').value++;
         }
-        tbody.insertBefore(trNodeLoose,c[toIndex]);
+        tbody.insertBefore(trNodeLoose, tbodyRow[toIndex]);
     }
 }
-function incTr(tr){
-    tr.querySelector('select').value++;
-}
-function decTr(tr){
-    tr.querySelector('select').value--;
-}
-function addToCart(){
+function addToCart() {
     this.nextSibling.textContent = cart.addItem(this.dataset.itemId);
     genCartTable();
 
 }
-function remFromCart(){
+function remFromCart() {
     this.previousSibling.textContent = cart.removeItem(this.dataset.itemId);
     genCartTable();
 
@@ -82,9 +68,11 @@ function remFromCart(){
 //    var trs = document.querySelectorAll('tbody tr');
 //    return trs[index];
 //}
+var store;
 var cart;
-function init(){
-    cart= new Cart(itemsJson);
+function init() {
+    store = new Store(itemsJson);
+    cart = new Cart(store);
     genProductsTable();
 //    genCartTable();
 }

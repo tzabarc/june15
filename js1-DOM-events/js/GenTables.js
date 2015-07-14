@@ -33,12 +33,23 @@ function createCartRowFromObject(id) {
     tdQuantity.className = "Cell";
     var tdPrice = document.createElement('div');
     tdPrice.className = "Cell";
+    var item = store.getItemById(id);
+    /*
+    var item = store.getItemById(id);
+    for (var att in item) {
+        if (item.hasOwnProperty(att)) {
 
-    var item = getItemById(id);
-    tdId.innerHTML = id;
-    tdName.innerHTML = item.name;
-    tdQuantity.innerHTML = cart.numOfItems(id);
-    tdPrice.innerHTML = item.getPrice();
+        var tdId = document.createElement('div');
+        tdId.className = "Cell";
+        td.innerText = item[att]
+        tr.appendChild(td);
+    }
+    }*/
+
+    tdId.innerText = id;
+    tdName.innerText = item.name;
+    tdQuantity.innerText = cart.numOfItems(id);
+    tdPrice.innerText = item.getPrice();
 
     [tdId, tdName, tdQuantity, tdPrice].forEach(function (elemToAppend) {
         tr.appendChild(elemToAppend);
@@ -81,17 +92,17 @@ function createProductsRowFromObject(obj, index) {
     tdButtonContainer.className = "Cell";
 
     tdId.innerHTML = obj.id;
-    tdName.innerHTML = obj.name;
-    tdDesc.innerHTML = obj.description;
-    tdLimit.innerHTML = obj.limit;
-    tdPrice.innerHTML = obj.getPrice();
+    tdName.innerText = obj.name;
+    tdDesc.innerText = obj.description;
+    tdLimit.innerText = obj.limit;
+    tdPrice.innerText = obj.getPrice();
 
     buttonAdd.dataset.itemId = buttonRem.dataset.itemId = obj.id;
 
     buttonAdd.addEventListener('click', addToCart);
     buttonRem.addEventListener('click', remFromCart);
-    buttonAdd.innerHTML = "+ Add";
-    buttonRem.innerHTML = "- Rem";
+    buttonAdd.innerText = "+ Add";
+    buttonRem.innerText = "- Rem";
 
     tdButtonContainer.appendChild(buttonAdd);
     tdButtonContainer.appendChild(document.createTextNode(cart.numOfItems(obj.id)));
@@ -113,7 +124,7 @@ function createTdOrderSelect(index) {
     var option;
     for (var i = start; i < end; i++) {
         option = document.createElement('option');
-        option.innerHTML = option.value = i;
+        option.innerText = option.value = i;
         select.appendChild(option);
     }
     select.value = start + index;
