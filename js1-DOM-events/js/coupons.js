@@ -2,11 +2,13 @@
  * Created by tzabarc on 7/13/15.
  */
 function Coupon(code) {
+    "use strict";
     this.code = code;
     this.active = false;
 }
 
 function DiscountCoupon(code, discountPercent) {
+    "use strict";
     Coupon.call(this, code); // call super constructor.
     this.discountPercent = discountPercent;
 }
@@ -16,6 +18,7 @@ DiscountCoupon.prototype.constructor = DiscountCoupon;
 
 
 function FreeItemCoupon(code, itemId) {
+    "use strict";
     Coupon.call(this, code); // call super constructor.
     this.itemId = itemId;
 }
@@ -27,8 +30,8 @@ var coupons = (function () {
 
 
     var couponsDB = {
-        "coupy": new DiscountCoupon("coupy"),
-        "salelbanel": new FreeItemCoupon("salelbanel")
+        "coupy": new DiscountCoupon("coupy",25),
+        "salelbanel": new FreeItemCoupon("salelbanel","01cd0f1cec513a04")
     };
 
 
@@ -46,9 +49,9 @@ var coupons = (function () {
         return 0;
 
         if (couponsDB[code] instanceof DiscountCoupon){
-
+            return cart.sumCostTotal()*couponsDB[code].discountPercent/100;
         }else if(couponsDB[code] instanceof FreeItemCoupon){
-            return cart.getPrice()
+            return store.getItemById(couponsDB[code].itemId).getPrice();
         }
         return 0;
     }
@@ -56,7 +59,6 @@ var coupons = (function () {
     function addCoupon(inputObj) {
         activateCoupon(inputObj.value);
         inputObj.value = "";
-
     }
 
     function activateCoupon(code) {
@@ -64,18 +66,62 @@ var coupons = (function () {
             couponsDB[code].active = true;
             console.log("activating coupon");
             //update current refund amount in $ (add property)
-            //update total refund ->update total cost
-            //draw coupon raw in table
-
-
+            addCouponRow(couponsDB[code]);//draw coupon raw in table
+            updateFinalPrice();//update total refund ->update total cost
         }
-
     }
 
-
     return {
-        //getRefundSum : getRefundSum,
+        getRefundByCode : getRefundByCode,
+        getRefundSum : getRefundSum,
         addCoupon: addCoupon
 
     }
 }());
+
+
+var tbodyCoupons = document.querySelector("#couponTableBody");
+function addCouponRow(couponObj){
+    var tr = document.createElement('div');
+    tr.className = "Row";
+    var tdCode = document.createElement('div');
+    tdCode.className = "Cell";
+    var tdType = document.createElement('div');
+    tdType.className = "Cell";
+    var tdPercent = document.createElement('div');
+    tdPercent.className = "Cell";
+    var tdItemName = document.createElement('div');
+    tdItemName.className = "Cell";
+    var tdRefund = document.createElement('div');
+    tdRefund.className = "Cell";
+
+    [tdCode, tdType, tdPercent, tdItemName, tdRefund].forEach(function (elemToAppend) {
+        tr.appendChild(elemToAppend);
+    });
+
+    tdCode.innerText = couponObj.code;
+    tdRefund.innerText = coupons.getRefundByCode(couponObj.code).toFixed(2)+ "$";
+    if (couponObj instanceof DiscountCoupon){
+
+        tdType.innerText = "Discount";
+        tdPercent.innerText = couponObj.discountPercent+ "%";
+        tdItemName.innerText = "-";
+
+    }else if (couponObj instanceof FreeItemCoupon){
+
+        tdType.innerText = "Free Item";
+        tdPercent.innerText = "-";
+        var item= store.getItemById(couponObj.itemId);
+        tdItemName.innerText = item.name;
+    }
+    tbodyCoupons.appendChild(tr);
+}
+
+var beforeDiscountCostValueElem = document.querySelector(".beforeDiscountCostValue");
+var discountCostValueElem = document.querySelector(".discountCostValue");
+var totalCostValueElem = document.querySelector(".totalCostValue");
+function updateFinalPrice(){
+    var beforeDiscountCostValue = beforeDiscountCostValueElem.innerText = cart.sumCostTotal();
+    var discountCostValue       = discountCostValueElem.innerText       = coupons.getRefundSum();
+    totalCostValueElem.innerText = beforeDiscountCostValue - discountCostValue ;
+}

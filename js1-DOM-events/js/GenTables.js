@@ -19,7 +19,7 @@ function genCartTable() {
 
     document.querySelector('.cartTable').replaceChild(newTbody, oldTbody);
 
-    updateTotalCost(cart.sumCostTotal());
+    updateFinalPrice();
 }
 
 function createCartRowFromObject(id) {
@@ -49,7 +49,7 @@ function createCartRowFromObject(id) {
     tdId.innerText = id;
     tdName.innerText = item.name;
     tdQuantity.innerText = cart.numOfItems(id);
-    tdPrice.innerText = item.getPrice();
+    tdPrice.innerText = item.getPrice().toFixed(2)+"$";
 
     [tdId, tdName, tdQuantity, tdPrice].forEach(function (elemToAppend) {
         tr.appendChild(elemToAppend);
@@ -91,11 +91,11 @@ function createProductsRowFromObject(obj, index) {
     var tdButtonContainer = document.createElement('div');
     tdButtonContainer.className = "Cell";
 
-    tdId.innerHTML = obj.id;
+    tdId.innerText = obj.id;
     tdName.innerText = obj.name;
     tdDesc.innerText = obj.description;
     tdLimit.innerText = obj.limit;
-    tdPrice.innerText = obj.getPrice();
+    tdPrice.innerText = obj.getPrice().toFixed(2)+"$";
 
     buttonAdd.dataset.itemId = buttonRem.dataset.itemId = obj.id;
 

@@ -53,9 +53,7 @@ function Cart(store){
         if(id && !cartDb[id]){
             return 0;
         }
-
         return this.numOfItems(id) * parseInt(store.getItemById(id).getPrice(),10);
-
     };
 
     this.sumCostTotal = function(){

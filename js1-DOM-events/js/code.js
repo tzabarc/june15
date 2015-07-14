@@ -13,10 +13,6 @@ var end = start + rpp;
 
 init();
 
-function updateTotalCost(price) {
-    document.querySelector(".beforeDiscountCostValue").innerText = price;
-}
-
 function rppChanged(inputObj) {
     rpp = +inputObj.value;
     end = start + rpp;
@@ -56,25 +52,17 @@ function selectionChanged() {
 function addToCart() {
     this.nextSibling.textContent = cart.addItem(this.dataset.itemId);
     genCartTable();
-
 }
 function remFromCart() {
     this.previousSibling.textContent = cart.removeItem(this.dataset.itemId);
     genCartTable();
-
 }
-
-//function getTr(index){
-//    var trs = document.querySelectorAll('tbody tr');
-//    return trs[index];
-//}
 var store;
 var cart;
 function init() {
     store = new Store(itemsJson);
     cart = new Cart(store);
     genProductsTable();
-//    genCartTable();
 }
 
 
