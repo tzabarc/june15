@@ -45,8 +45,9 @@ var coupons = (function () {
 
     function getRefundByCode(code) {
 
-        if (!couponsDB[code])
-        return 0;
+        if (!couponsDB[code] || !couponsDB[code].active){
+            return 0;
+        }
 
         if (couponsDB[code] instanceof DiscountCoupon){
             return cart.sumCostTotal()*couponsDB[code].discountPercent/100;

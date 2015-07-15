@@ -8,6 +8,13 @@
 </head>
 <body>
 <div class="productsTableContainer">
+    <div class="formContainer">
+        <label for="rpc">Records per page :</label>
+        <input id="rpc" type="number" name="quantity" value="5" min="1" onchange="rppChanged(this)"><br>
+        <label for="page">Page No.</label>
+        <input id="page" type="number" name="www" value="1" min="1" onchange="pageChanged(this)">
+
+    </div>
     <div class="Table productsTable">
         <div class="Heading">
             <div class="Cell" data-field="indexes"></div>
@@ -20,13 +27,6 @@
         </div>
         <div class="tbody">
         </div>
-    </div>
-    <div class="formContainer">
-        <label for="rpc">Records per page :</label>
-        <input id="rpc" type="number" name="quantity" value="5" min="1" onchange="rppChanged(this)"><br>
-        <label for="page">Page No.</label>
-        <input id="page" type="number" name="www" value="1" min="1" onchange="pageChanged(this)">
-
     </div>
     <div class="cartContainer">
         <div class="Table cartTable">
@@ -72,10 +72,11 @@
 
 <script src="js/pubsub.js"></script>
 <script src="js/Store_Item.js"></script>
-<script src="js/items.js"></script>
+<script src="js/itemsJSON.js"></script>
+<script src="js/eventsFunctions.js"></script>
 <script src="js/Cart.js"></script>
 <script src="js/coupons.js"></script>
 <script src="js/GenTables.js"></script>
-<script src="js/code.js"></script>
+<script src="js/init.js"></script>
 </body>
 </html>

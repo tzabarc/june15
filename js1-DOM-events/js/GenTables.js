@@ -64,7 +64,7 @@ function genProductsTable() {
     var tbody = document.querySelector('.productsTable .tbody');
     var newTbody = document.createElement('div');
     newTbody.className = "tbody";
-    var currentPageItems = itemsJson.slice(start, end);
+    var currentPageItems = store.getItemsSlice(start, end);
     currentPageItems.forEach(function (item, index) {
         newTbody.appendChild(createProductsRowFromObject(item, index));
     });
@@ -75,7 +75,7 @@ function genProductsTable() {
 function createProductsRowFromObject(obj, index) {
 
     var tr = document.createElement('div');
-    tr.className = "Row " + obj.typeName;
+    tr.className = "Row " + ((obj instanceof SaleItem)?'SaleItem':'Item');
     var tdId = document.createElement('div');
     tdId.className = "Cell";
     var tdName = document.createElement('div');

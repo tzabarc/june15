@@ -9,30 +9,32 @@ tr:nth-child(even){
     background-color:lightgrey;
 
 }
-table, th, td {
-    border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
-}
-table {
-    border-collapse: collapse;
-}
+/*table, th, td {*/
+    /*border-top: 1px solid grey;*/
+    /*border-bottom: 1px solid grey;*/
+/*}*/
+/*table {*/
+    /*border-collapse: collapse;*/
+/*}*/
 
 input{
     float: right;
 }
 form{
- //   width: 600px;
+    width: 600px;
     float: left;
 }
 .formContainer{
-
-    position:fixed;
-    bottom: 100px;
+    margin: 20px;
+    width: 300px;
+    line-height: 20px;
+    /*position:fixed;*/
+    /*bottom: 100px;*/
 }
 .productsTableContainer {
 
-    height: 750px;
-    overflow-y: auto;
+    /*height: 750px;*/
+    /*overflow-y: auto;*/
  }
 .cartContainer{
     float:right;

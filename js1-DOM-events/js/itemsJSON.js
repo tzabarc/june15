@@ -228,17 +228,17 @@ var itemsJson = [
     }
 ];
 
-var itemsTemp = [];
-for(var i = 0; i<itemsJson.length; i++){
-    var currItem = itemsJson[i];
-    if(Math.random()>0.5){
-        itemsTemp.push(new Item(currItem));
-    }else{
-        var discount = parseInt(Math.random()*100,10);
-        itemsTemp.push(new SaleItem(currItem, discount));
-    }
+//var itemsTemp = [];
+//for(var i = 0; i<itemsJson.length; i++){
+//    var currItem = itemsJson[i];
+//    if(Math.random()>0.5){
+//        itemsTemp.push(new Item(currItem));
+//    }else{
+//        var discount = parseInt(Math.random()*100,10);
+//        itemsTemp.push(new SaleItem(currItem, discount));
+//    }
+//
+//}
 
-}
-
-itemsJson = itemsTemp;
+//itemsJson = itemsTemp;
 
