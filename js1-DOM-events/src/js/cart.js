@@ -3,14 +3,16 @@
  */
 
 function Cart(store){
-    var cartDb={};
+    'use strict';
+    var cartDb = {};
 
-    var totalSize=0;// no of total items
+    var totalSize = 0;// no of total items
 
     //return no of instances after addition
-    this.addItem= function(id){
-        if (!cartDb[id])
-            cartDb[id]=0;
+    this.addItem = function (id){
+        if (!cartDb[id]){
+            cartDb[id] = 0;
+        }
 
         cartDb[id]++;
         totalSize++;
@@ -19,48 +21,49 @@ function Cart(store){
     };
 
     //return no of instances after addition
-    this.removeItem= function(id){
-        if (cartDb[id]>0){
+    this.removeItem = function (id){
+        if (cartDb[id] > 0){
             totalSize--;
             cartDb[id]--;
-            if (cartDb[id]==0)
+            if (cartDb[id] === 0){
                 delete cartDb[id];
+            }
 
         }
         return cartDb[id] || 0;
     };
 
     //returns object with items in cart; "id":number
-    this.getCart= function(){
+    this.getCart = function (){
         return cartDb;
     };
 
     //erase cart
-    this.erase= function(){
-        cartDb={};
+    this.erase = function (){
+        cartDb = {};
     };
 
     //returns no of unique items
-    this.uniqueSize=function(){
+    this.uniqueSize = function (){
         return Object.keys(cartDb).length;
     };
 
-    this.numOfItems = function(id){
+    this.numOfItems = function (id){
         return cartDb[id] || 0;
     };
 
-    this.sumCostById = function(id){
-        if(id && !cartDb[id]){
+    this.sumCostById = function (id){
+        if (id && !cartDb[id]){
             return 0;
         }
-        return this.numOfItems(id) * parseInt(store.getItemById(id).getPrice(),10);
+        return this.numOfItems(id) * parseInt(store.getItemById(id).getPrice(), 10);
     };
 
-    this.sumCostTotal = function(){
-        var sum=0;
+    this.sumCostTotal = function (){
+        var sum = 0;
 
-        for(var id in cartDb){
-            sum+= this.sumCostById(id);
+        for (var id in cartDb){
+            sum += this.sumCostById(id);
         }
         return sum;
     };
